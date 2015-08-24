@@ -10,7 +10,7 @@ var hookPort = process.env.HOOK_PORT || process.env.EXPRESS_PORT;
 var hookUser = process.env.EXPRESS_USER;
 var hookPass = process.env.EXPRESS_PASSWORD;
 var authHeader = ( hookUser && hookPass ) ?
-	"Basic " + new Buffer( username + ":" + password ).toString("base64") :
+	"Basic " + new Buffer( hookUser + ":" + hookPass ).toString("base64") :
 	undefined;
 var hookURL = process.env.HOOK_URL || "/nonstop/event";
 var eventRooms = process.env.EVENT_ROOMS || "nonstop-events";

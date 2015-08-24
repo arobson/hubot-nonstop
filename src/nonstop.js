@@ -147,7 +147,7 @@ function promotePackage( filter ) {
 	checkClient();
 	return connection
 		.then( function( client ) {
-			return client.package.projects( { "?": filter } );
+			return client.package.promote( { "?": filter } );
 		} );
 }
 

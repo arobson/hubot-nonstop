@@ -245,7 +245,7 @@ module.exports = {
 		}
 
 		return nonstop.promotePackage( options )
-		.then( onResult, onError );
+			.then( onResult, onError );
 	},
 	"package.search": function( res, prep, project, owner, branch, specifier ) {
 		var version, sha;

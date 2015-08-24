@@ -1,7 +1,7 @@
 {
   "name": "hubot-nonstop",
   "description": "Nonstop integration for hubot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Alex Robson <asrobson@gmail.com>",
   "license": "MIT",
   "keywords": "hubot, hubot-scripts, nonstop",

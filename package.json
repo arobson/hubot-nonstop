@@ -1,0 +1,47 @@
+{
+  "name": "hubot-nonstop",
+  "description": "Nonstop integration for hubot",
+  "version": "0.1.0",
+  "author": "Alex Robson <asrobson@gmail.com>",
+  "license": "MIT",
+  "keywords": "hubot, hubot-scripts, nonstop",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/arobson/hubot-hubot-nonstop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arobson/hubot-hubot-nonstop/issues"
+  },
+
+  "dependencies": {
+    "halon": "~0.3.2",
+    "lodash": "^3.10.1",
+    "request": "^2.60.0"
+  },
+
+  "peerDependencies": {
+    "hubot": "2.x"
+  },
+
+  "devDependencies": {
+    "chai": "^2.1.1",
+    "coffee-script": "1.6.3",
+    "biggulp": "^0.2.2",
+    "chai": "^3.2.0",
+    "chai-as-promised": "^5.1.0",
+    "gulp": "^3.9.0",
+    "install": "^0.1.8",
+    "npm": "^2.14.0",
+    "sinon": "^1.16.1",
+    "sinon-as-promised": "^4.0.0",
+    "sinon-chai": "^2.8.0",
+    "hubot": "2.x",
+    "matchdep": "~0.3.0"
+  },
+
+  "main": "index.coffee",
+
+  "scripts": {
+    "test": "gulp"
+  }
+}

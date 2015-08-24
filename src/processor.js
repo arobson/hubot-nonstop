@@ -236,7 +236,7 @@ module.exports = {
 			if ( err.count ) {
 				var list = err.matches.join( "\r\n\t" );
 				return reply( res, "Too many packages (%d) matched the criteria: _%s_ \r\n\t: %s",
-				err.count, list );
+				err.count, criteria, list );
 			} else {
 				return reply( res, "An error occurred promoting the package where _%s_ \r\n> %s",
 				criteria,

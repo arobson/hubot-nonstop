@@ -48,6 +48,28 @@ function checkClient() {
 	}
 }
 
+function checkWebhook( robotName, ip, port, url, headers ) {
+	checkClient();
+	return connection
+		.then( function( client ) {
+			client.hook.self( { id: robotName } )
+				.then( function() {
+					return true;
+				}, function() {
+					var fullUrl = "http://" + ip + ":" + port + url;
+					return client.hook.add( {
+						id: robotName,
+						url: fullUrl,
+						method: "POST",
+						headers: headers || {} } );
+				} );
+		} );
+}
+
+function createWebhook( robotName ) {
+
+}
+
 function getHosts() {
 	checkClient();
 	return connection
@@ -198,6 +220,7 @@ function sendHostSetting( hostName, ops ) {
 }
 
 module.exports = {
+	checkWebhook: checkWebhook,
 	getHosts: getHosts,
 	getHostStatus: getHostStatus,
 	getHostsBy: getHostsBy,

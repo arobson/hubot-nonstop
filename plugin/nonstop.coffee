@@ -10,6 +10,11 @@
 #     INDEX_TOKEN=<client token>
 #     INDEX_FREQUENCY=<frequency to check for updates in ms>
 #
+#   USED WHEN SETTING UP NONSTOP WEBHOOK TO CALL BACK TO YOUR HUBOT
+#     HOOK_IP=<public IP of container server>
+#     HOOK_PORT=<public port of container server>
+#     HOOK_URL=<the url to call>
+#
 #   THESE ARE ONLY USED IF YOU'RE HOSTING WITHIN A NONSTOP SERVICE HOST
 #     HOSTNAME=<your bot name>
 #     PACKAGE_BRANCH=<the branch to use>
@@ -40,4 +45,4 @@
 plugin = require "../src/plugin"
 
 module.exports = (robot) ->
-  plugin( robot );
+	plugin( robot );

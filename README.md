@@ -17,10 +17,3 @@ Then add **hubot-hubot-nonstop** to your `external-scripts.json`:
   "hubot-hubot-nonstop"
 ]
 ```
-
-## Sample Interaction
-
-```
-user1>> hubot hello
-hubot>> hello!
-```

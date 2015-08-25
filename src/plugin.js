@@ -10,11 +10,118 @@ var hookPort = process.env.HOOK_PORT || process.env.EXPRESS_PORT;
 var hookUser = process.env.EXPRESS_USER;
 var hookPass = process.env.EXPRESS_PASSWORD;
 var authHeader = ( hookUser && hookPass ) ?
-	"Basic " + new Buffer( hookUser + ":" + hookPass ).toString("base64") :
+	"Basic " + new Buffer( hookUser + ":" + hookPass ).toString( "base64" ) :
 	undefined;
 var hookURL = process.env.HOOK_URL || "/nonstop/event";
 var eventRooms = process.env.EVENT_ROOMS || "nonstop-events";
 eventRooms = eventRooms.split( "," );
+
+function ensureWebHook() {
+	var headers = authHeader ? { Authorization: authHeader } : undefined;
+	nonstop.checkWebhook( robot.name, hookIP, hookPort, hookURL, headers )
+		.then(
+				function() {
+					_.each( eventRooms, function( room ) {
+						try {
+							robot.messageRoom( room, "Web hook integration established successfully." );
+						} catch ( ex ) {
+						}
+					} );
+				},
+				function() {
+					_.each( eventRooms, function( room ) {
+						try {
+							robot.messageRoom( room, "Web hook integration could not be established." );
+						} catch ( ex ) {
+						}
+					} );
+				}
+			);
+}
+
+function onWebHook( req, res ) {
+	var ev = req.body;
+	_.each( eventRooms, function( room ) {
+		try {
+			robot.messageRoom(
+				room,
+				formatEvent( ev )
+			);
+		} catch ( ex ) {
+		}
+	} );
+	res.status( 200 ).send( "Ok" );
+}
+
+function formatEvent( ev ) {
+	switch ( ev.topic ) {
+		case "host.registered":
+			return format(
+				"*Host Registered With Index*:\r\n```%s```",
+					formatJSON( {
+						host: ev.name,
+						port: ev.port,
+						state: ev.state,
+						package: {
+							project: ev.package.project,
+							owner: ev.package.owner,
+							branch: ev.package.branch,
+							verison: ev.package.version || "any"
+						}
+					} )
+				);
+		case "host.downloading":
+			return format(
+				"*Host Downloading Package*:\r\n```%s```",
+					formatJSON( {
+						host: ev.host.name,
+						port: ev.host.port,
+						state: ev.host.state,
+						uptime: ev.host.uptime,
+						downloading: {
+							project: ev.project,
+							owner: ev.owner,
+							branch: ev.branch,
+							version: ev.version
+						},
+						package: {
+							project: ev.package.project,
+							owner: ev.package.owner,
+							branch: ev.package.branch,
+							verison: ev.package.version || "any"
+						}
+					} )
+				);
+		case "host.installing":
+			return format(
+				"*Host Installing Package*:\r\n```%s```",
+					formatJSON( {
+						host: ev.host.name,
+						port: ev.host.port,
+						state: ev.host.state,
+						uptime: ev.host.uptime,
+						downloading: {
+							project: ev.project,
+							owner: ev.owner,
+							branch: ev.branch,
+							version: ev.version
+						},
+						package: {
+							project: ev.package.project,
+							owner: ev.package.owner,
+							branch: ev.package.branch,
+							verison: ev.package.version || "any"
+						}
+					} )
+				);
+		default:
+			return format( "*Unspecified Event*:\r\n```%s```", formatJSON( ev ) );
+	}
+}
+
+function formatJSON( obj ) {
+	var json = JSON.stringify( _.omit( obj, [ "topic" ] ), null, 2 );
+}
 
 function setup( robot ) {
 	var lists = _.values( commands );
@@ -27,44 +134,9 @@ function setup( robot ) {
 		} );
 	} );
 
-	if( hookIP && hookPort ) {
-		robot.router.post( hookURL, function( req, res ) {
-			var ev = req.body;
-			var json = JSON.stringify( _.omit( ev, [ "topic" ] ), null, 2 );
-			_.each( eventRooms, function( room ) {
-				try {
-					robot.messageRoom(
-						room,
-						format( "*Event* - `%s`:\r\n```%s```", ev.topic, json )
-					);
-				} catch( ex ) {
-
-				}
-			} );
-			res.status( 200 ).send( "Ok" );
-		} );
-		var headers = authHeader ? { "Authorization": authHeader } : undefined;
-		nonstop.checkWebhook( robot.name, hookIP, hookPort, hookURL, headers )
-			.then(
-				function() {
-					_.each( eventRooms, function( room ) {
-						try {
-							robot.messageRoom( room, "Web hook integration established successfully." );
-						} catch( ex ) {
-
-						}
-					} );
-				},
-				function() {
-					_.each( eventRooms, function( room ) {
-						try {
-							robot.messageRoom( room, "Web hook integration could not be established." );
-						} catch( ex ) {
-
-						}
-					} );
-				}
-			);
+	if ( hookIP && hookPort ) {
+		robot.router.post( hookURL, onWebHook );
+		ensureWebHook();
 	}
 }
 

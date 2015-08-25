@@ -67,7 +67,6 @@ function checkWebhook( robotName, ip, port, url, headers ) {
 }
 
 function createWebhook( robotName ) {
-
 }
 
 function getHosts() {
@@ -78,7 +77,7 @@ function getHosts() {
 				.then( function( result ) {
 					return result.hosts;
 				} );
-			} );
+		} );
 }
 
 function getHostStatus( hostName ) {
@@ -97,7 +96,7 @@ function getHostStatus( hostName ) {
 						return host;
 					}
 				);
-			} );
+		} );
 }
 
 function getHostsBy( filter ) {
@@ -110,7 +109,7 @@ function getHostsBy( filter ) {
 						return result.hosts;
 					}
 				);
-			} );
+		} );
 }
 
 function getPackages() {
@@ -123,7 +122,7 @@ function getPackages() {
 						return result.packages;
 					}
 				);
-			} );
+		} );
 }
 
 function getPackagesBy( filter ) {

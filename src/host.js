@@ -22,8 +22,8 @@ function checkClient( state ) {
 		state.client = halon( opts );
 		state.connection = state.client
             .on( "rejected", function( client, err ) {
-				console.log( "Failed to connect to host at %s with %s. Retrying.", state.url, err.stack );
-				setTimeout( function() {
+	console.log( "Failed to connect to host at %s with %s. Retrying.", state.url, err.stack );
+	setTimeout( function() {
 					state.connection = state.client.connect();
 				}, 1000 );
             }, true )
@@ -36,7 +36,7 @@ function command( state, check, cmd ) {
 	return state.connection
 		.then(
             function( client ) {
-				return client.control.command( { command: cmd } );
+	return client.control.command( { command: cmd } );
             }
         );
 }
@@ -46,7 +46,7 @@ function configure( state, check, ops ) {
 	return state.connection
 		.then(
             function( client ) {
-				return client.control.configure( { body: ops } );
+	return client.control.configure( { body: ops } );
             }
         );
 }

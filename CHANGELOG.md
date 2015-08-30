@@ -1,5 +1,11 @@
 ## 0.1.*
 
+### 0.1.6
+Bug fix - missing arguments in web hook call.
+
+### 0.1.5
+Additional corrections for status and uptime to support short-hands.
+
 ### 0.1.4
  * Bug fix - correct regular expression for status and uptime commands
  * Minor improvements to event reporting

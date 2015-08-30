@@ -16,7 +16,7 @@ var hookURL = process.env.HOOK_URL || "/nonstop/event";
 var eventRooms = process.env.EVENT_ROOMS || "nonstop-events";
 eventRooms = eventRooms.split( "," );
 
-function ensureWebHook() {
+function ensureWebHook( robot ) {
 	var headers = authHeader ? { Authorization: authHeader } : undefined;
 	nonstop.checkWebhook( robot.name, hookIP, hookPort, hookURL, headers )
 		.then(
@@ -136,7 +136,7 @@ function setup( robot ) {
 
 	if ( hookIP && hookPort ) {
 		robot.router.post( hookURL, onWebHook );
-		ensureWebHook();
+		ensureWebHook( robot );
 	}
 }
 

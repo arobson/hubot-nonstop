@@ -66,9 +66,6 @@ function checkWebhook( robotName, ip, port, url, headers ) {
 		} );
 }
 
-function createWebhook( robotName ) {
-}
-
 function getHosts() {
 	checkClient();
 	return connection

@@ -87,7 +87,7 @@ module.exports = {
 		.then( onHosts, onError );
 	},
 	"host.status": function hostStatus( res, arg1, arg2 ) {
-		var hostName = arg1 === "of" || arg1 === "for" ? arg2 : arg1;
+		var hostName = arg1 === "of " || arg1 === "for " ? arg2 : arg1;
 
 		function onStatus( status ) {
 			if ( status ) {
@@ -107,7 +107,7 @@ module.exports = {
 		.then( onStatus, onError );
 	},
 	"host.uptime": function hostUptime( res, arg1, arg2 ) {
-		var hostName = arg1 === "of" || arg1 === "for" ? arg2 : arg1;
+		var hostName = arg1 === "of " || arg1 === "for " ? arg2 : arg1;
 
 		function onStatus( status ) {
 			if ( status ) {

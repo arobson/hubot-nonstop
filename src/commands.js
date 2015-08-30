@@ -5,12 +5,12 @@ module.exports = {
 	],
 	"host.list": [ /^list hosts$/ ],
 	"host.status": [
-		/(\S*) status$/,
-		/status (of |for )?(.*)$/
+		/^(\S*) status$/,
+		/^status (of |for )?(.*)$/
 	],
 	"host.uptime": [
-		/(\S*) uptime$/,
-		/uptime (of |for )?(.*)$/
+		/^(\S*) uptime$/,
+		/^uptime (of |for )?(.*)$/
 	],
 	"host.search": [
 		/hosts (with |of |for )?([^\s\/\\]+)?[\/\\]?([^\s\/\\]+)?[\/\\]?([^\s]+)?\s?([a-fA-F0-9]{8}|[0-9]+[.][0-9]+[.][0-9]+[- ][0-9]+)?/

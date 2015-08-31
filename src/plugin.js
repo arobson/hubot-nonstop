@@ -39,7 +39,7 @@ function ensureWebHook( robot ) {
 			);
 }
 
-function onWebHook( req, res ) {
+function onWebHook( robot, req, res ) {
 	var ev = req.body;
 	_.each( eventRooms, function( room ) {
 		try {
@@ -135,7 +135,7 @@ function setup( robot ) {
 	} );
 
 	if ( hookIP && hookPort ) {
-		robot.router.post( hookURL, onWebHook );
+		robot.router.post( hookURL, onWebHook.bind( undefined, robot ) );
 		ensureWebHook( robot );
 	}
 }

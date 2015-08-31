@@ -1,5 +1,8 @@
 ## 0.1.*
 
+### 0.1.7
+Bug fix - ensure robot is passed to web hook handler.
+
 ### 0.1.6
 Bug fix - missing arguments in web hook call.
 

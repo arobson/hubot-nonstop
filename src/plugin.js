@@ -58,69 +58,104 @@ function formatEvent( ev ) {
 		case "host.registered":
 			return format(
 				"*Host Registered With Index*:\r\n```%s```",
-					formatJSON( {
-						host: ev.name,
-						port: ev.port,
-						state: ev.state,
-						package: {
-							project: ev.package.project,
-							owner: ev.package.owner,
-							branch: ev.package.branch,
-							verison: ev.package.version || "any"
-						}
-					} )
-				);
+				formatJSON( {
+					host: ev.name,
+					port: ev.port,
+					state: ev.state,
+					package: {
+						project: ev.package.project,
+						owner: ev.package.owner,
+						branch: ev.package.branch,
+						verison: ev.package.version || "any"
+					}
+				} )
+			);
 		case "host.downloading":
 			return format(
 				"*Host Downloading Package*:\r\n```%s```",
-					formatJSON( {
-						host: ev.host.name,
-						port: ev.host.port,
-						state: ev.host.state,
-						uptime: ev.host.uptime,
-						downloading: {
-							project: ev.project,
-							owner: ev.owner,
-							branch: ev.branch,
-							version: ev.version
-						},
-						package: {
-							project: ev.package.project,
-							owner: ev.package.owner,
-							branch: ev.package.branch,
-							verison: ev.package.version || "any"
-						}
-					} )
-				);
+				formatJSON( {
+					host: ev.host.name,
+					port: ev.host.port,
+					state: ev.host.state,
+					uptime: ev.host.uptime,
+					downloading: {
+						project: ev.project,
+						owner: ev.owner,
+						branch: ev.branch,
+						version: ev.version
+					},
+					package: {
+						project: ev.package.project,
+						owner: ev.package.owner,
+						branch: ev.package.branch,
+						verison: ev.package.version || "any"
+					}
+				} )
+			);
 		case "host.installing":
 			return format(
 				"*Host Installing Package*:\r\n```%s```",
-					formatJSON( {
-						host: ev.host.name,
-						port: ev.host.port,
-						state: ev.host.state,
-						uptime: ev.host.uptime,
-						downloading: {
-							project: ev.project,
-							owner: ev.owner,
-							branch: ev.branch,
-							version: ev.version
-						},
-						package: {
-							project: ev.package.project,
-							owner: ev.package.owner,
-							branch: ev.package.branch,
-							verison: ev.package.version || "any"
-						}
-					} )
-				);
+				formatJSON( {
+					host: ev.host.name,
+					port: ev.host.port,
+					state: ev.host.state,
+					uptime: ev.host.uptime,
+					downloading: {
+						project: ev.project,
+						owner: ev.owner,
+						branch: ev.branch,
+						version: ev.version
+					},
+					package: {
+						project: ev.package.project,
+						owner: ev.package.owner,
+						branch: ev.package.branch,
+						verison: ev.package.version || "any"
+					}
+				} )
+			);
+		case "package.promoted":
+			return format(
+				"*Package Promoted*:\r\n```%s```",
+				formatJSON( {
+					package: {
+						project: ev.package.project,
+						owner: ev.package.owner,
+						branch: ev.package.branch,
+						verison: ev.package.version
+					},
+					file: ev.file,
+					relative: ev.relative,
+					fullPath: ev.fullPath,
+					directory: ev.directory
+				} ) );
+		case "package.uploaded":
+			return format(
+				"*Package Uploaded*:\r\n```%s```",
+				formatJSON( {
+					package: {
+						project: ev.package.project,
+						owner: ev.package.owner,
+						branch: ev.package.branch,
+						verison: ev.package.version
+					},
+					file: ev.file,
+					relative: ev.relative,
+					fullPath: ev.fullPath,
+					directory: ev.directory
+				} ) );
 		default:
-			return format( "*Unspecified Event*:\r\n```%s```", formatJSON( ev ) );
+			if( ev.topic ) {
+				return format( "*Event - %s*:\r\n```%s```", ev.topic, formatJSON( ev ) );
+			} else {
+				return format( "*Unspecified Event*:\r\n```%s```", formatJSON( ev ) );
+			}
 	}
 }
 
 function formatJSON( obj ) {
 	var json = JSON.stringify( _.omit( obj, [ "topic" ] ), null, 2 );
+	return json;
 }
 
 function setup( robot ) {

@@ -1,5 +1,10 @@
 ## 0.1.*
 
+### 0.1.8
+ * Bug fix - error in how event details were formatted but not returned
+ * Bug fix - error in formatting response when sending commands to service hosts
+ * Improvement - add specialized output for package related events
+
 ### 0.1.7
 Bug fix - ensure robot is passed to web hook handler.
 

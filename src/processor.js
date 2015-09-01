@@ -158,7 +158,8 @@ module.exports = {
 	},
 	"host.command": function commandHost( res, command, hostName ) {
 		function onSent( response ) {
-			return reply( res, "I told *%s* to _%s_; it replied, `%s`", response.message );
+			return reply( res, "I told *%s* to _%s_; it replied, `%s`",
+				hostName, command, response.message );
 		}
 
 		function onError( err ) {

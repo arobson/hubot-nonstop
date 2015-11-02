@@ -145,7 +145,7 @@ function formatEvent( ev ) {
 					directory: ev.directory
 				} ) );
 		default:
-			if( ev.topic ) {
+			if ( ev.topic ) {
 				return format( "*Event - %s*:\r\n```%s```", ev.topic, formatJSON( ev ) );
 			} else {
 				return format( "*Unspecified Event*:\r\n```%s```", formatJSON( ev ) );

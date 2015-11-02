@@ -1,5 +1,8 @@
 ## 0.1.*
 
+### 0.1.9
+Bug fix - stop hubot from thinking everything with a ':' and `=` is a host property set command by prefixing it with set.
+
 ### 0.1.8
  * Bug fix - error in how event details were formatted but not returned
  * Bug fix - error in formatting response when sending commands to service hosts

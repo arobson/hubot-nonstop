@@ -34,7 +34,7 @@
 #   uptime of|for <hostName> - displays the uptime of the host last reported
 #   hosts of|for|with <project>/<owner>/<branch> <slug>|<version> - finds all hosts hosting a package matching criteria
 #   start|stop|reset <hostName> - sends start, stop or reset command to host
-#   <hostName>:<property>=<value> - sets a package filter property to change what packages a host will consider
+#   set <hostName>:<property>=<value> - sets a package filter property to change what packages a host will consider
 #   list packages - lists all packages in the index
 #   promote <fileName> - promotes package to release by file name
 #   promote <project>/<owner>/<branch> <slug>|<version> - promotes a single package matching the criteria

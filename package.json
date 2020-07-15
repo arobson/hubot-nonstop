@@ -15,7 +15,7 @@
 
   "dependencies": {
     "halon": "~0.3.2",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.19",
     "request": "^2.60.0"
   },
 
